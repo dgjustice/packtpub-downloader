@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/python
 
-from __future__ import print_function
 import os
 import sys
 import glob
@@ -101,6 +100,10 @@ def download_book(filename, url):
     print('Starting to download ' + filename)
 
     with open(filename, 'wb') as f:
+        r = requests.get(url, stream=True)
+        if r.status_code == 401: # jwt expired 
+            user.refresh_header() # refresh token 
+        # naive one-shot retry
         r = requests.get(url, stream=True)
         total = r.headers.get('content-length')
         if total is None:
