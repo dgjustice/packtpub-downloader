@@ -24,6 +24,5 @@ lint:
 
 tests: clean lint
 	mypy ./
-	python -m pytest --cov --pylama --verbose --color=yes ./
-	coverage xml
+	python -m pytest --cov --pylama --color=yes packt_downloader
 
